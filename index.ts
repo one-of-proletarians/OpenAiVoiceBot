@@ -33,7 +33,9 @@ bot.on("msg:text", async (ctx) => {
       model: "tts-1-hd",
       response_format: "opus",
     });
-    ctx.replyWithVoice(new InputFile(Buffer.from(await res.arrayBuffer())));
+    ctx.replyWithVoice(new InputFile(Buffer.from(await res.arrayBuffer())), {
+      reply_to_message_id: ctx.update.message?.message_id,
+    });
   } catch (e) {
     console.log(e);
   }
@@ -62,7 +64,9 @@ bot.on(":voice", async (ctx) => {
       file: createReadStream(filePath),
     });
 
-    ctx.reply(text);
+    ctx.reply(text, {
+      reply_to_message_id: ctx.update.message?.message_id,
+    });
   } catch (err) {
     console.error("Ошибка при загрузке файла:", err);
     ctx.reply("Ошибка при сохранении файла.");
