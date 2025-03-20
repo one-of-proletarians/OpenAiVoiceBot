@@ -20,7 +20,16 @@ bot.use((ctx, next) => {
   else ctx.reply("🤔");
 });
 
-bot.command("start", async (ctx) => ctx.reply("hello"));
+bot.command("start", async (ctx) => {
+  const uid = ctx.from?.id;
+  if (uid && userIds.includes(uid)) {
+    ctx.reply("Добро пожаловать !!!");
+    ctx.reply("😉");
+  } else {
+    ctx.reply("Я тебя не знаю.");
+    ctx.reply("🤔");
+  }
+});
 
 bot.on("msg:text", async (ctx) => {
   const input = ctx.update.message?.text;
