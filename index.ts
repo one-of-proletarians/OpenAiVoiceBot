@@ -217,11 +217,11 @@ async function fetchFile(
 }
 
 function getUserVoice(id: number | undefined) {
-  const { voice } = db
+  const result = db
     .query(`SELECT voice FROM users WHERE userid = ?`)
     .get(id ?? 0) as {
     voice: SpeechCreateParams["voice"] | null;
   };
 
-  return voice ?? "shimmer";
+  return result?.voice ?? "shimmer";
 }
