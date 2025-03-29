@@ -1,4 +1,4 @@
-# bot
+# OpenAiVoiceBot
 
 To install dependencies:
 
